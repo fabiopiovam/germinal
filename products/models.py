@@ -155,7 +155,7 @@ class Product(models.Model):
     
     owner = models.ForeignKey(User, verbose_name=u"Usuário")
     producer = models.ForeignKey(Producer, verbose_name=u"Produtor")
-    segment = models.ForeignKey(Segment, verbose_name=u"Segmento")
+    segment = models.ManyToManyField(Segment, verbose_name=u"Segmento", null=True, blank=True)
     certificate = models.ManyToManyField(Certificate, null=True, blank=True, verbose_name=u"Certificado")
     
     title = models.CharField(u'Título', max_length=160)

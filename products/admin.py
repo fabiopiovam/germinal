@@ -10,7 +10,7 @@ class PhotoInline(admin.TabularInline):
     fields = ['image','main','title']
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'producer','segment','owner','available','published')
+    list_display = ('title', 'producer','owner','available','published')
     list_filter = ['producer__name','segment__title','available','published']
     search_fields = ['title','slug','ingredients','owner__username']
     
