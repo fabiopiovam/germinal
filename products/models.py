@@ -27,7 +27,7 @@ class Country(models.Model):
         verbose_name = u"País"
         verbose_name_plural = u"Países"
     
-    name = models.CharField(u'Nome', max_length=80)
+    name = models.CharField(u'País', max_length=80)
     code = models.CharField(u'Código', max_length=4)
 
 class State(models.Model):
@@ -38,7 +38,7 @@ class State(models.Model):
         verbose_name = u"UF"
     
     country = models.ForeignKey(Country, verbose_name=u"País")
-    name = models.CharField(u'Nome', max_length=80)
+    name = models.CharField(u'Estado', max_length=80)
     acronym = models.CharField(u'Sigla', max_length=4)
 
 class ProductionSys(models.Model):
@@ -61,7 +61,7 @@ class Producer(models.Model):
     production_sys = models.ManyToManyField(ProductionSys, null=True, blank=True, verbose_name=u"Sistema de Produção")
     state = models.ForeignKey(State, verbose_name=u"UF")
     country = models.ForeignKey(Country, verbose_name=u"País")
-    name = models.CharField(u'Nome', max_length=160)
+    name = models.CharField(u'Produtor', max_length=160)
     responsible = models.CharField(u'Responsável', null=True, blank=True, max_length=160)
     contact = models.CharField(u'Contato', null=True, blank=True, max_length=160)
     city =  models.CharField(u'Cidade', max_length=160)
@@ -76,7 +76,7 @@ class Segment(models.Model):
     class Meta:
         verbose_name = u"segmento"
     
-    title = models.CharField(u'Título', max_length=160)
+    title = models.CharField(u'Segmento', max_length=160)
 
 class Certificate(models.Model):
     def __unicode__(self):
