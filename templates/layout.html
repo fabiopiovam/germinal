@@ -3,59 +3,15 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock %} | MotoSucata.biz</title>
+        <title>{% block title %}{% endblock %} | Germinal.info</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static 'products/css/normalize.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'products/css/webflow.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'products/css/structure.css' %}">
-        <link rel="icon" type="image/x-icon" href="{% static '/img/favicon.ico' %}">
-        <link rel="apple-touch-icon" href="{% static '/img/thumbnail-starter.png' %}">
         
         {% block head %}{% endblock %}
     </head>
     <body>
-        <div class="nav-section">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="w-col w-col-4">
-                        <div class="company"><a href="/" title="início">MotoSucata</a></div>
-                    </div>
-                    <div class="w-col w-col-8 navigation-column">
-                        <a class="nav-link" href="/">Início</a>
-                        <a class="nav-link" href="/q/type/sucata-inteira">Sucatas Inteiras</a>
-                        <a class="nav-link" href="/q/type/peça-avulsa">Peças Avulsas</a>
-                        <a class="nav-link last" href="/q/type/moto-documentada">Motos Documentadas</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="main-section">
-            {% block content %}
-            
-            {% endblock %}
-        </div>
-        
-        <div class="section footer">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="w-col w-col-6">
-                        <div>© motosucata.biz</div>
-                    </div>
-                    <div class="w-col w-col-6">
-                        <a href="/sobre-nos/" class="footer-link">Sobre nós</a>
-                        <a href="/formas-de-entrega/" class="footer-link">Formas de Entrega</a>
-                        <a href="/formas-de-pagamento/" class="footer-link">Formas de Pagamento</a>
-                        <a href="/contact" class="footer-link">Contato</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <script type="text/javascript" src="{% static 'products/js/webflow.js' %}"></script>
-        <script src="{% static 'products/js/holder/holder.js' %}" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" src="{% static 'products/js/search.js' %}"></script>
+    	<h1>Germinal.info</h1>
+    	{% block content %}{% endblock %}
         {% block script %}{% endblock %}
     </body>
 </html>
