@@ -1,4 +1,7 @@
 .project
+.pydevproject
+.settings/
+venv/
 
 # Media Files
 media/*
@@ -8,7 +11,3 @@ media/products/*
 !media/products/.empty
 static/*
 !static/.empty
-
-.pydevproject/
-.settings/
-venv/
