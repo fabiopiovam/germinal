@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {% load thumbnail %}
-{% load embed_video_tags %}
 {% load staticfiles %}
 
 {% block title %} {{ product.title }} {% endblock %}
@@ -28,7 +27,7 @@
     <div class="w-container">
         <div class="w-row">
             {% if product.photo_set.count %}
-            <div class="w-col w-col-6 w-col-right"> <h2>{{ product.title }}</h2> </div>
+            <div class="w-col w-col-6 w-col-right"> <h2>{{ product.title }} ({{product.unit}})</h2> </div>
             <div class="w-col w-col-6 center">
                 {% for photo in product.photo_set.all %}
                 <div class="tn_photo" id="tn_photo_{{photo.id}}">
@@ -56,25 +55,10 @@
             
             
             <div class="w-col w-col-3">
-                <p class="price">R$ {{ product.price }}</p>
+                <p class="price">Varejo R$ {{ product.retail_price }}</p>
+                <p class="price">Atacado R$ {{ product.wholesale_price }}</p>
                 
-                <p>
-                    {{ product.get_type_display }} | {{ product.year|stringformat:"s" }} 
-                    {% if product.used %} - Usada{% endif %}
-                </p>
-                
-                <p>
-                    {{ product.mark }} {{ product.model }} - {{ product.version }} | {{ product.km }} Km 
-                    {% if product.cc %} | {{product.cc}} cc {% endif %}
-                </p>
-                
-                <p>
-                    Freios: {{ product.brakes }} | Partida: {{ product.starting_system }}
-                </p>
-                
-                <p>{{ product.city }} - {{ product.state }}</p>
-                
-                <p><strong>{{ product.phone }}</strong></p>
+                <p> {{ product.segment }} </p>
             </div>
         </div>
     </div>
@@ -89,15 +73,6 @@
                 {% endautoescape %}
             </div>
         </div>
-        
-        
-        {% if product.photo_set.count %}
-        <div class="w-row">
-            <div class="w-col w-col-6">
-                <div class="video_link">{% video product.video_link '100% x 100%' %}</div>
-            </div>
-        </div>
-        {% endif %}
         
     </div>
 </div>

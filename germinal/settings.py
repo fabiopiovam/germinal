@@ -130,8 +130,8 @@ REDACTOR_UPLOAD = 'static/'
 THUMBNAIL_ALIASES = {
     '': {
         'large': {'size': (500, 375), 'crop': 'scale'},
-        'medium': {'size': (425, 425), 'crop': 'smart'},
-        'small': {'size': (140, 140), 'crop': 'smart'},
+        'medium': {'size': (425, 425), 'crop': 'scale'},
+        'small': {'size': (140, 140), 'crop': 'scale'},
     },
 }
 
