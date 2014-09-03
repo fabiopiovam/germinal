@@ -8,5 +8,6 @@ media/products/*
 !media/products/.empty
 static/*
 !static/.empty
-.pydevproject
-.settings
+
+.pydevproject/
+.settings/
