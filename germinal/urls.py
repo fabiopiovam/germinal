@@ -13,6 +13,9 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^redactor/', include('redactor.urls')),
+    
+    url(r'^$', 'products.views.index', name='home'),
+    url(r'^(?P<slug>[\w_-]+)$', 'products.views.details'),
 )
 
 if settings.LOCAL:

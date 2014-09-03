@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block title %} Início {% endblock %}
+
+{% block content %}
+
+<div class="section">
+    <div class="w-container">
+        <div class="w-row">
+            {% for product in product_list %}
+            <div class="w-col w-col-3 w-col-small-6">
+                <img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
+                <h3>{{ product.title }} ({{ product.unit }})</h3>
+                <p>{{ product.segment }}</p>
+                <p>Ingredientes: {{ product.ingredients|striptags|truncatewords:23 }}</p>
+                <p>Características: {{ product.characteristics|striptags|truncatewords:23 }}</p>
+                <a class="button" href="{{ product.get_absolute_url }}" title="Confira!">Ver produto</a>
+            </div>
+            
+            {% if forloop.counter|divisibleby:"4" %}
+            </div><div class="w-row">
+            {% endif %}
+            
+            {% empty %}
+            
+            <p>Em breve publicaremos os produtos disponíveis, aguardem!</p>
+            
+            {% endfor %}
+        </div>        
+    </div>
+</div>
+
+{% endblock %}

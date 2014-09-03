@@ -120,6 +120,10 @@ class Photo(models.Model):
     title = models.CharField(u'Título', max_length=100, blank=True)
     main = models.BooleanField(u'Foto de capa')
 
+class ProductActivatedManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductActivatedManager, self).get_queryset().filter(published=True).order_by('-updated_at')
+
 class Product(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
@@ -171,3 +175,6 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    u''' Managers '''
+    objects     = models.Manager()
+    activated   = ProductActivatedManager()

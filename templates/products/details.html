@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+{% load staticfiles %}
+
+{% block title %} {{ product.title }} {% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block script %}{% endblock %}
+
+
+{% block content %}
+
+{% if not product %}
+<div class="section hero">
+    <div class="w-container">
+        <p>Desculpe, este produto está indisponível ou não existe em nosso banco de dados.</p>
+    </div>
+</div>
+
+{% else %}
+
+<div class="w-container" id="nav-products">
+    <div> <a href="{{http_referer}}" title="voltar">&laquo; voltar</a> </div>
+</div>
+<div class="section hero hero-cuztomized">
+    <div class="w-container">
+        <div class="w-row">
+            {% if product.photo_set.count %}
+            <div class="w-col w-col-6 w-col-right"> <h2>{{ product.title }}</h2> </div>
+            <div class="w-col w-col-6 center">
+                {% for photo in product.photo_set.all %}
+                <div class="tn_photo" id="tn_photo_{{photo.id}}">
+                    <img width="auto" height="auto" src="{{ photo.image|thumbnail_url:'small'|default:'holder.js/40x40' }}" title="{{photo.title}}" alt="{{photo.title}}">
+                    <input type="hidden" id="url_img_{{photo.id}}" value="{{ photo.image|thumbnail_url:'large'|default:'holder.js/500x375' }}"/>
+                </div>
+                {% endfor %}
+            </div>
+            
+            {% else %}
+            <div class="w-col w-col-6"> <h2>{{ product.title }}</h2> </div>
+            {% endif %}
+        </div>
+        
+        
+        
+        <div class="w-row">
+            {% if product.photo_set.count %}
+            <div class="w-col w-col-6 center">
+                <img id="large-image" width="auto" height="auto" />
+                <p id="image-description"> </p>
+            </div>
+            {% endif %}
+            
+            
+            
+            <div class="w-col w-col-3">
+                <p class="price">R$ {{ product.price }}</p>
+                
+                <p>
+                    {{ product.get_type_display }} | {{ product.year|stringformat:"s" }} 
+                    {% if product.used %} - Usada{% endif %}
+                </p>
+                
+                <p>
+                    {{ product.mark }} {{ product.model }} - {{ product.version }} | {{ product.km }} Km 
+                    {% if product.cc %} | {{product.cc}} cc {% endif %}
+                </p>
+                
+                <p>
+                    Freios: {{ product.brakes }} | Partida: {{ product.starting_system }}
+                </p>
+                
+                <p>{{ product.city }} - {{ product.state }}</p>
+                
+                <p><strong>{{ product.phone }}</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="w-container">
+        
+        <div class="w-row">
+            <div class="w-col w-col-12">
+                {% autoescape off %}
+                <div class="description">{{ product.description }}</div>
+                {% endautoescape %}
+            </div>
+        </div>
+        
+        
+        {% if product.photo_set.count %}
+        <div class="w-row">
+            <div class="w-col w-col-6">
+                <div class="video_link">{% video product.video_link '100% x 100%' %}</div>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
