@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
-
-from django.template.defaultfilters import slugify
+import random, glob, os, shutil
+from datetime import datetime
 
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
+from django.template.defaultfilters import slugify
+from django.conf import settings
+
 from redactor.fields import RedactorField
+from easy_thumbnails.fields import ThumbnailerImageField
 
 month_choices = (
     (1, u'Janeiro'), (2, u'Fevereiro'), (3, u'Março'),
@@ -80,6 +87,39 @@ class Certificate(models.Model):
     
     title = models.CharField(u'Título', max_length=160)
 
+class Photo(models.Model):
+    class Meta:
+        verbose_name = u"foto"
+    
+    def save(self):
+        if self.image:
+            if self.id:
+                obj_photo = Photo.objects.get(id=self.id)
+                if self.image not in [obj_photo.image]:
+                    for fl in glob.glob("%s/%s*" % (settings.MEDIA_ROOT,obj_photo.image)):
+                        os.remove(fl)
+            
+            super(Photo, self).save()
+    
+    def delete(self):
+        obj_photo = Photo.objects.get(id=self.id)
+        super(Photo, self).delete()
+        for fl in glob.glob("%s/%s*" % (settings.MEDIA_ROOT,obj_photo.image)):
+            os.remove(fl)
+    
+    def get_upload_to_image(self, filename):
+        ext = filename[-3:].lower()
+        if ext == 'peg': ext='jpeg'        
+        return 'products/%s/%s_%s.%s' % (self.products.slug, datetime.now().strftime('%Y%m%d%H%M%S'), str(random.randint(00000,99999)), ext)
+    
+    def __unicode__(self):
+        return u'%s' % self.image
+    
+    products = models.ForeignKey('Product')
+    image = ThumbnailerImageField(u'Imagem', blank=True, upload_to = get_upload_to_image, resize_source=dict(size=(800, 600), sharpen=True, crop="scale"))
+    title = models.CharField(u'Título', max_length=100, blank=True)
+    main = models.BooleanField(u'Foto de capa')
+
 class Product(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
@@ -92,7 +132,24 @@ class Product(models.Model):
             super(Product, self).save(*args, **kwargs)
             self.slug = slugify(str(self.id) + ' ' + self.title)
         super(Product, self).save(*args, **kwargs)
+        
+    def delete(self):
+        slug = self.slug
+        super(Product, self).delete()
+        
+        dir = '%s/products/%s' % (settings.MEDIA_ROOT, slug)
+        
+        if os.path.exists(dir):
+            shutil.rmtree(dir)
     
+    def get_absolute_url(self):
+        return reverse('products.views.details', kwargs={'slug': self.slug})
+    
+    def main_photo_set(self):
+        photo = self.photo_set.order_by('-main','id')
+        return photo[0] if photo else None
+    
+    owner = models.ForeignKey(User, verbose_name=u"Usuário")
     producer = models.ForeignKey(Producer, verbose_name=u"Produtor")
     segment = models.ForeignKey(Segment, verbose_name=u"Segmento")
     certificate = models.ManyToManyField(Certificate, null=True, blank=True, verbose_name=u"Certificado")
@@ -100,10 +157,15 @@ class Product(models.Model):
     title = models.CharField(u'Título', max_length=160)
     slug = models.SlugField(max_length=200)
     unit = models.CharField(u'Unidade', max_length=10)
-    harvest_from = models.IntegerField(u'Safra', null=True, blank=True, choices=month_choices)
-    harvest_until = models.IntegerField(u'', null=True, blank=True, choices=month_choices)
+    harvest_from = models.IntegerField(u'Safra (início)', null=True, blank=True, choices=month_choices)
+    harvest_until = models.IntegerField(u'Safra  (fim)', null=True, blank=True, choices=month_choices)
     retail_price = models.DecimalField(u'Varejo R$', max_digits=6, decimal_places=2, blank=True, null=True)
     wholesale_price = models.DecimalField(u'Atacado R$', max_digits=6, decimal_places=2, blank=True, null=True)
     description =  RedactorField(verbose_name=u'Descrição', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
     nutrition_facts = RedactorField(verbose_name=u'Informações nutricionais', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
+    
+    published = models.BooleanField(u'Publicado', default=True)
+    available = models.BooleanField(u'Disponível', default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
