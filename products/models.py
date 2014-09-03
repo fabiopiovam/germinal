@@ -162,6 +162,8 @@ class Product(models.Model):
     retail_price = models.DecimalField(u'Varejo R$', max_digits=6, decimal_places=2, blank=True, null=True)
     wholesale_price = models.DecimalField(u'Atacado R$', max_digits=6, decimal_places=2, blank=True, null=True)
     description =  RedactorField(verbose_name=u'Descrição', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
+    characteristics =  RedactorField(verbose_name=u'Características', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
+    ingredients =  RedactorField(verbose_name=u'Ingredientes', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
     nutrition_facts = RedactorField(verbose_name=u'Informações nutricionais', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
     
     published = models.BooleanField(u'Publicado', default=True)

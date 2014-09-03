@@ -12,13 +12,13 @@ class PhotoInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'producer', 'segment', 'owner')
     list_filter = ['producer','segment','available','published']
-    search_fields = ['title','slug','owner__username']
+    search_fields = ['title','slug','ingredients','owner__username']
     
     fieldsets = [
         (None,          {'fields': ['title','unit','harvest_from','harvest_until']}),
         (None,          {'fields': ['producer','segment','certificate']}),
         (u"Preço",      {'fields': ['retail_price','wholesale_price']}),
-        (u"Detalhes",   {'fields': ['description','nutrition_facts']}),
+        (u"Detalhes",   {'fields': ['description','characteristics','ingredients','nutrition_facts']}),
         (u"Publicação", {'fields': ['available','published']}),
     ]
     
