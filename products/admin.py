@@ -13,6 +13,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'producer','owner','available','published')
     list_filter = ['producer__name','segment__title','available','published']
     search_fields = ['title','slug','ingredients','owner__username']
+    filter_horizontal = ('segment','certificate')
     
     fieldsets = [
         (None,          {'fields': ['title','unit','harvest_from','harvest_until']}),

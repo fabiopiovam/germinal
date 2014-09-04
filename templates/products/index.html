@@ -15,7 +15,6 @@
                 	<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
                 </div>
                 <h3>{{ product.title }} ({{ product.unit }})</h3>
-                <p>{{ product.segment }}</p>
                 <p>Ingredientes: {{ product.ingredients|striptags|truncatewords:23 }}</p>
                 <p>Características: {{ product.characteristics|striptags|truncatewords:23 }}</p>
                 <a class="button" href="{{ product.get_absolute_url }}" title="Confira!">Ver produto</a>
