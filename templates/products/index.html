@@ -6,31 +6,96 @@
 
 {% block content %}
 
-<div class="section">
-    <div class="w-container">
-        <div class="w-row">
-            {% for product in product_list %}
-            <div class="" style="float: left;width: 25%; border: 1px solid #ddd;margin: 5px;padding: 5px;border-radius: 10px;">
-                <div style="width: 334px; text-align: center;height: 255px;vertical-align: middle;display:table-cell;">
-                	<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
-                </div>
-                <h3>{{ product.title }} ({{ product.unit }})</h3>
-                <p>Ingredientes: {{ product.ingredients|striptags|truncatewords:23 }}</p>
-                <p>Características: {{ product.characteristics|striptags|truncatewords:23 }}</p>
-                <a class="button" href="{{ product.get_absolute_url }}" title="Confira!">Ver produto</a>
-            </div>
-            
-            {% if forloop.counter|divisibleby:"4" %}
-            </div><div class="w-row">
-            {% endif %}
-            
-            {% empty %}
-            
-            <p>Em breve publicaremos os produtos disponíveis, aguardem!</p>
-            
-            {% endfor %}
-        </div>        
-    </div>
+{% include "products/_carousel.html" %}
+
+<div class="germinal-section section-segment">
+	<div class="container marketing">
+		<!-- Thrsel -->
+		<div class="row">
+			<div class="col-lg-4">
+				<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+				<h2>Heading</h2>
+				<p>
+					Donec sed odio dui. Etiam porta sem malesuada magna mollis
+					euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi
+					leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo
+					cursus magna.
+				</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details »</a>
+				</p>
+			</div><!-- /.col-lg-4 -->
+			<div class="col-lg-4">
+				<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+				<h2>Heading</h2>
+				<p>
+					Duis mollis, est non commodo luctus, nisi erat porttitor
+					ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus
+					sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor
+					mauris condimentum nibh.
+				</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details »</a>
+				</p>
+			</div><!-- /.col-lg-4 -->
+			<div class="col-lg-4">
+				<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+				<h2>Heading</h2>
+				<p>
+					Donec sed odio dui. Cras justo odio, dapibus ac facilisis
+					in, egestas eget quam. Vestibulum id ligula porta felis euismod semper.
+					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus.
+				</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details »</a>
+				</p>
+			</div><!-- /.col-lg-4 -->
+		</div><!-- /.row -->
+	</div>
+</div>
+
+<div class="germinal-section section-institutional">
+	<div class="container marketing">
+
+		{% for product in product_list %}
+		<div class="row">
+			<div class="col-md-3" style="border: 1px solid #f7c49b; border-radius: 10px;">
+				<div style="width: 334px; text-align: center;height: 255px;vertical-align: middle;display:table-cell;">
+					<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
+				</div>
+				<h3>{{ product.title }} ({{ product.unit }})</h3>
+				<p>
+					Ingredientes: {{ product.ingredients|striptags|truncatewords:23 }}
+				</p>
+				<p>
+					Características: {{ product.characteristics|striptags|truncatewords:23 }}
+				</p>
+				<p>
+					<a class="btn btn-default" href="{{ product.get_absolute_url }}" role="button" title="Confira!">Ver produto</a>
+				</p>
+			</div>
+
+			{% if forloop.counter|divisibleby:"4" %}
+		</div>
+		<div class="row">
+			{% endif %}
+
+			{% empty %}
+
+			<p>
+				Em breve publicaremos os produtos disponíveis, aguardem!
+			</p>
+
+			{% endfor %}
+		</div>
+	</div><!-- /.container -->
+</div>
+
+<div class="germinal-section">
+	<div class="container marketing">
+		{% include "products/_institutional.html" %}
+	</div>
 </div>
 
 {% endblock %}

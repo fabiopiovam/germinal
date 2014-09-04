@@ -1,17 +1,153 @@
 <!DOCTYPE html>
-{% load staticfiles %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% endblock %} | Germinal.info</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        {% block head %}{% endblock %}
-    </head>
-    <body>
-    	<h1>Germinal.info</h1>
-    	{% block content %}{% endblock %}
-        {% block script %}{% endblock %}
-    </body>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+	<!--<![endif]-->
+	{% load staticfiles %}
+	{% load google_analytics %}
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="{% static 'products/favicon.ico' %}">
+
+		<title>{% block title %}{% endblock %} | Germinal.info</title>
+
+		<!-- Bootstrap core CSS -->
+		<link rel="stylesheet" href="{% static 'products/css/bootstrap.css' %}">
+
+		<link rel="stylesheet" href="{% static 'products/css/main.css' %}">
+
+		<script src="{% static 'products/js/vendor/ie-emulation-modes-warning.js' %}"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="{% static 'products/js/vendor/html5shiv.min.js' %}"></script>
+		<script src="{% static 'products/js/vendor/respond.min.js' %}"></script>
+		<![endif]-->
+
+		<!-- Custom styles for this template -->
+		<link rel="stylesheet" href="{% static 'products/css/carousel.css' %}">
+		<style type="text/css" id="holderjs-style"></style>
+
+		{% block head %}{% endblock %}
+	</head>
+	<!-- NAVBAR
+	================================================== -->
+	<body>
+		<!--[if lt IE 7]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+		<div class="navbar-wrapper">
+
+			<div style="position: absolute; top: 0px; z-index: 10; left: 70px;">
+				<img src="{%static 'products/img/germinal.png'%}" alt="" style="margin-top: -20px; background-color: #30001a; border-radius: 0 0 13px 13px;" />
+			</div>
+
+			<div style="z-index: 5; margin-top: -20px; width:100%;">
+				<div class="navbar-inverse navbar-static-top" role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="col-md-8">
+							&nbsp;
+						</div>
+						<div style="height: 1px;" class="navbar-collapse collapse">
+							<ul class="nav navbar-nav">
+								<li class="active">
+									<a href="#">Home</a>
+								</li>
+								<li>
+									<a href="#about">About</a>
+								</li>
+								<li>
+									<a href="#contact">Contact</a>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<a href="#">Action</a>
+										</li>
+										<li>
+											<a href="#">Another action</a>
+										</li>
+										<li>
+											<a href="#">Something else here</a>
+										</li>
+										<li class="divider"></li>
+										<li class="dropdown-header">
+											Nav header
+										</li>
+										<li>
+											<a href="#">Separated link</a>
+										</li>
+										<li>
+											<a href="#">One more separated link</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		{% block content %}{% endblock %}
+
+		<div class="container">
+			<!-- FOOTER -->
+			<footer>
+				<p class="pull-right">
+					<a href="#">voltar ao topo</a>
+				</p>
+				<p>
+					© 2014 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a>
+				</p>
+			</footer>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="{% static 'products/js/vendor/jquery.js' %}"></script>
+		<script src="{% static 'products/js/vendor/bootstrap.js' %}"></script>
+		<script src="{% static 'products/js/main.js' %}"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="{% static 'products/js/vendor/ie10-viewport-bug-workaround.js' %}"></script>
+
+		{% block script %}{% endblock %}
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<script>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] ||
+				function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', '{% google_analytics %}', 'auto');
+			ga('send', 'pageview');
+
+		</script>
+	</body>
 </html>
