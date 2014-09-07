@@ -1,0 +1,16 @@
+.carousel .item {
+  height: auto !important;
+}
+
+.carousel-inner > .item > img {
+  position: inherit !important;
+  top: auto !important;
+  left: auto !important;
+  min-width: 100%;
+  height: auto !important;
+}
+
+.carousel {
+  height: auto !important;
+  margin-top: 50px;
+}
