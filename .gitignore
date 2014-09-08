@@ -66,4 +66,4 @@ static/*
 # Others
 germinal/settings_local.py
 germinal/settings_production.py
-deploy
+*.directory
