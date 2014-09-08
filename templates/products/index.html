@@ -4,6 +4,11 @@
 
 {% block title %} Início {% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'products/css/carousel.css' %}">
+<link rel="stylesheet" href="{% static 'products/css/carousel-customized.css' %}">
+{% endblock %}
+
 {% block content %}
 
 {% include "products/_carousel.html" %}

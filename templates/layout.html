@@ -32,8 +32,6 @@
 		<![endif]-->
 
 		<!-- Custom styles for this template -->
-		<link rel="stylesheet" href="{% static 'products/css/carousel.css' %}">
-		<link rel="stylesheet" href="{% static 'products/css/carousel-customized.css' %}">
 		<style type="text/css" id="holderjs-style"></style>
 
 		{% block head %}{% endblock %}
@@ -46,11 +44,11 @@
 		<![endif]-->
 		<div class="navbar-wrapper">
 
-			<div style="position: absolute; top: 0px; z-index: 10; left: 70px;">
-				<img src="{%static 'products/img/germinal.png'%}" alt="" style="margin-top: -20px; background-color: #30001a; border-radius: 0 0 13px 13px;" />
+			<div class="navbar-logo">
+				<img src="{%static 'products/img/germinal.png'%}" alt="" />
 			</div>
 
-			<div style="z-index: 5; margin-top: -20px; width:100%;">
+			<div class="navbar-menu-customized">
 				<div class="navbar-inverse navbar-static-top" role="navigation">
 					<div class="container">
 						<div class="navbar-header">
@@ -61,10 +59,7 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
-						<div class="col-md-8">
-							&nbsp;
-						</div>
-						<div style="height: 1px;" class="navbar-collapse collapse">
+						<div class="navbar-collapse collapse navbar-right">
 							<ul class="nav navbar-nav">
 								<li class="active">
 									<a href="#">Home</a>
