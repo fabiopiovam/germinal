@@ -5,13 +5,16 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 
 from models import Product
+from banners.models import Banner
 
 def index(request):
-    product_list    = Product.activated.all()[:8]
+    product_list        = Product.activated.all()[:8]
+    banner_principal    = Banner.activated.get(type='principal')
     
     template = loader.get_template('products/index.html')
     context = RequestContext(request, {
         'product_list'  : product_list,
+        'banner_principal'  : banner_principal,
     })
     return HttpResponse(template.render(context))
 

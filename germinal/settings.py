@@ -134,6 +134,9 @@ THUMBNAIL_ALIASES = {
         'large': {'size': (500, 375), 'crop': 'scale'},
         'medium': {'size': (425, 425), 'crop': 'scale'},
         'small': {'size': (140, 140), 'crop': 'scale'},
+        
+        'banner-small': {'size': (140, 90), 'crop': 'scale'},
+        'banner-full': {'size': (1350, 563), 'crop': 'scale'},
     },
 }
 
@@ -160,8 +163,10 @@ INSTALLED_APPS = (
     'redactor',
     'embed_video',
     'djangosecure',
+    'adminsortable',
     
     'products',
+    'banners',
 )
 
 MIDDLEWARE_CLASSES = (
