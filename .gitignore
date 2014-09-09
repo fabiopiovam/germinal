@@ -60,6 +60,8 @@ media/*
 !media/products
 media/products/*
 !media/products/.empty
+media/banners/*
+!media/banners/.empty
 static/*
 !static/.empty
 
