@@ -146,6 +146,8 @@ THUMBNAIL_ALIASES = {
         
         'banner-small': {'size': (140, 90), 'crop': 'scale'},
         'banner-full': {'size': (1350, 563), 'crop': 'scale'},
+        
+        'segment-small': {'size': (140, 140), 'crop': 'scale'},
     },
 }
 

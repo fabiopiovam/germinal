@@ -77,8 +77,34 @@ class Segment(models.Model):
     
     class Meta:
         verbose_name = u"segmento"
+        
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+        else:
+            obj_photo = Segment.objects.get(id=self.id)
+            if obj_photo.image and self.image not in [obj_photo.image]:
+                for fl in glob.glob("%s/%s*" % (settings.MEDIA_ROOT,obj_photo.image)):
+                    os.remove(fl)
+            
+        super(Segment, self).save()
+    
+    def delete(self):
+        obj_photo = Segment.objects.get(id=self.id)
+        super(Segment, self).delete()
+        
+        if obj_photo.image:
+            for fl in glob.glob("%s/%s*" % (settings.MEDIA_ROOT,obj_photo.image)):
+                os.remove(fl)
+    
+    def get_upload_to_image(self, filename):
+        ext = filename[-3:].lower()
+        if ext == 'peg': ext='jpeg'        
+        return 'segments/%s_%s.%s' % (self.slug, datetime.now().strftime('%Y%m%d%H%M%S'), ext)
     
     title = models.CharField(u'Segmento', max_length=160)
+    slug = models.SlugField(max_length=200)
+    image = ThumbnailerImageField(u'Imagem', blank=True, null=True, upload_to = get_upload_to_image, resize_source=dict(size=(250, 250), sharpen=False, crop="scale"))
 
 class Certificate(models.Model):
     def __unicode__(self):

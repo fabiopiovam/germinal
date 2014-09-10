@@ -42,9 +42,14 @@ class ProducerAdmin(admin.ModelAdmin):
         (u"Contato",        {'fields': ['responsible','contact','phone','email','website']}),
     ]
 
+
+class SegmentAdmin(admin.ModelAdmin):
+    search_fields = ['title','slug']
+    fields = ('title','image')
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Producer, ProducerAdmin)
-admin.site.register(Segment)
+admin.site.register(Segment, SegmentAdmin)
 admin.site.register(Certificate)
 admin.site.register(Country)
 admin.site.register(State)
