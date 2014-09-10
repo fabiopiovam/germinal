@@ -9,8 +9,10 @@ from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
 from django.conf import settings
 
-from redactor.fields import RedactorField
+from ckeditor.fields import RichTextField
 from easy_thumbnails.fields import ThumbnailerImageField
+from adminsortable.models import Sortable
+from adminsortable.fields import SortableForeignKey
 
 month_choices = (
     (1, u'Janeiro'), (2, u'Fevereiro'), (3, u'Março'),
@@ -87,8 +89,8 @@ class Certificate(models.Model):
     
     title = models.CharField(u'Título', max_length=160)
 
-class Photo(models.Model):
-    class Meta:
+class Photo(Sortable):
+    class Meta(Sortable.Meta):
         verbose_name = u"foto"
     
     def save(self):
@@ -115,20 +117,19 @@ class Photo(models.Model):
     def __unicode__(self):
         return u'%s' % self.image
     
-    products = models.ForeignKey('Product')
-    image = ThumbnailerImageField(u'Imagem', blank=True, upload_to = get_upload_to_image, resize_source=dict(size=(800, 600), sharpen=True, crop="scale"))
-    title = models.CharField(u'Título', max_length=100, blank=True)
-    main = models.BooleanField(u'Foto de capa')
+    products = SortableForeignKey('Product')
+    image = ThumbnailerImageField(u'Imagem', upload_to = get_upload_to_image, resize_source=dict(size=(800, 600), sharpen=False, crop="scale"))
+    title = models.CharField(u'Título', max_length=100, blank=True, null=True)
 
 class ProductActivatedManager(models.Manager):
     def get_queryset(self):
         return super(ProductActivatedManager, self).get_queryset().filter(published=True).order_by('-updated_at')
 
-class Product(models.Model):
+class Product(Sortable):
     def __unicode__(self):
         return u'%s' % self.title
     
-    class Meta:
+    class Meta(Sortable.Meta):
         verbose_name = u"produto"
     
     def save(self, *args, **kwargs):
@@ -150,7 +151,7 @@ class Product(models.Model):
         return reverse('products.views.details', kwargs={'slug': self.slug})
     
     def main_photo_set(self):
-        photo = self.photo_set.order_by('-main','id')
+        photo = self.photo_set.order_by('order')
         return photo[0] if photo else None
     
     owner = models.ForeignKey(User, verbose_name=u"Usuário")
@@ -165,10 +166,10 @@ class Product(models.Model):
     harvest_until = models.IntegerField(u'Safra  (fim)', null=True, blank=True, choices=month_choices)
     retail_price = models.DecimalField(u'Varejo R$', max_digits=6, decimal_places=2, blank=True, null=True)
     wholesale_price = models.DecimalField(u'Atacado R$', max_digits=6, decimal_places=2, blank=True, null=True)
-    description =  RedactorField(verbose_name=u'Descrição', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
-    characteristics =  RedactorField(verbose_name=u'Características', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
-    ingredients =  RedactorField(verbose_name=u'Ingredientes', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
-    nutrition_facts = RedactorField(verbose_name=u'Informações nutricionais', allow_file_upload=False, allow_image_upload=False, null=True, blank=True)
+    description =  RichTextField(verbose_name=u'Descrição', null=True, blank=True)
+    characteristics =  RichTextField(verbose_name=u'Características', null=True, blank=True)
+    ingredients =  RichTextField(verbose_name=u'Ingredientes', null=True, blank=True)
+    nutrition_facts = RichTextField(verbose_name=u'Informações nutricionais', null=True, blank=True)
     
     published = models.BooleanField(u'Publicado', default=True)
     available = models.BooleanField(u'Disponível', default=True)

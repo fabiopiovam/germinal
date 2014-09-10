@@ -126,8 +126,17 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates')
 )
 
-REDACTOR_OPTIONS = {'lang': 'pt_br', 'focus':False}
-REDACTOR_UPLOAD = 'static/'
+CKEDITOR_UPLOAD_PATH = "ckeditor/"
+CKEDITOR_CONFIGS = {
+    'basic_ckeditor': {
+        'toolbar': 'Basic',
+    },
+   'default': {
+       'toolbar': 'Full',
+       'height': 300,
+       #'width': 300,
+   },
+}
 
 THUMBNAIL_ALIASES = {
     '': {
@@ -138,11 +147,6 @@ THUMBNAIL_ALIASES = {
         'banner-small': {'size': (140, 90), 'crop': 'scale'},
         'banner-full': {'size': (1350, 563), 'crop': 'scale'},
     },
-}
-
-# Flexselect settings.
-FLEXSELECT = {
-    'include_jquery': True,
 }
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
@@ -160,10 +164,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     
     'easy_thumbnails',
-    'redactor',
     'embed_video',
     'djangosecure',
     'adminsortable',
+    'ckeditor',
     
     'products',
     'banners',

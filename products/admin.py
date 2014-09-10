@@ -2,14 +2,14 @@
 
 from django.contrib import admin
 from products.models import Product, Producer, Segment, Certificate, Country, State, ProductionSys, Photo
+from adminsortable.admin import SortableAdmin, SortableTabularInline
 
-class PhotoInline(admin.TabularInline):
-    template = 'admin/tabular_image.html'
+class PhotoInline(SortableTabularInline):
+    #template = 'admin/tabular_image.html'
     model = Photo
     extra = 1
-    fields = ['image','main','title']
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SortableAdmin):
     list_display = ('title', 'producer','owner','available','published')
     list_filter = ['producer__name','segment__title','available','published']
     search_fields = ['title','slug','ingredients','owner__username']
