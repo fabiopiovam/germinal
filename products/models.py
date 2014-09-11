@@ -174,7 +174,7 @@ class Product(Sortable):
             shutil.rmtree(dir)
     
     def get_absolute_url(self):
-        return reverse('products.views.details', kwargs={'slug': self.slug})
+        return reverse('product', kwargs={'slug': self.slug})
     
     def main_photo_set(self):
         photo = self.photo_set.order_by('order')

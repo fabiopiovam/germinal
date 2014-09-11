@@ -1,0 +1,8 @@
+{% load tags_tags %}
+
+<p>
+Tags:
+{% for tag in object|get_tags %}
+<a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+{% endfor %}
+</p>

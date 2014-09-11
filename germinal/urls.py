@@ -10,8 +10,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
     
+    (r'^pages/', include('cms.urls')),
+    (r'^tags/', include('tags.urls')),
+    
     url(r'^$', 'products.views.index', name='home'),
-    url(r'^(?P<slug>[\w_-]+)$', 'products.views.details'),
+    url(r'^(?P<slug>[\w_-]+)$', 'products.views.details', name='product'),
 )
 
 if settings.LOCAL:

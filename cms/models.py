@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.core.urlresolvers import reverse
 
 from ckeditor.fields import RichTextField
 
@@ -28,6 +29,9 @@ class PageActivatedManager(models.Manager):
 class Page(models.Model):    
     def __unicode__(self):
         return u'%s' % self.title
+    
+    def get_absolute_url(self):
+        return reverse('page', kwargs={'slug': self.slug})
     
     class Meta:
         verbose_name = u"página"

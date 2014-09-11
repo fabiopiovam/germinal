@@ -3,6 +3,12 @@
 from django.contrib import admin
 from products.models import Product, Producer, Segment, Certificate, Country, State, ProductionSys, Photo
 from adminsortable.admin import SortableAdmin, SortableTabularInline
+from tags import set_tags
+from tags.forms import FormTags
+
+class FormProduct(FormTags):
+    class Meta:
+        model = Product
 
 class PhotoInline(SortableTabularInline):
     model = Photo
@@ -18,13 +24,17 @@ class ProductAdmin(SortableAdmin):
         (None,          {'fields': ['title','unit','harvest_from','harvest_until']}),
         (None,          {'fields': ['producer','segment','certificate']}),
         (u"Preço",      {'fields': ['retail_price','wholesale_price']}),
-        (u"Detalhes",   {'fields': ['description','characteristics','ingredients','nutrition_facts']}),
+        (u"Detalhes",   {'fields': ['description','characteristics','ingredients','nutrition_facts','tags']}),
         (u"Publicação", {'fields': ['available','published']}),
     ]
     
     inlines = [PhotoInline]
     
+    form = FormProduct
+    
     def save_model(self, request, obj, form, change):
+        set_tags(obj, form.cleaned_data['tags'])
+        
         if getattr(obj, 'owner_id', None) is None:
             obj.owner_id = request.user.id
         obj.save()
