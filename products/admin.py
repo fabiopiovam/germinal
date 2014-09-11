@@ -33,11 +33,11 @@ class ProductAdmin(SortableAdmin):
     form = FormProduct
     
     def save_model(self, request, obj, form, change):
-        set_tags(obj, form.cleaned_data['tags'])
-        
         if getattr(obj, 'owner_id', None) is None:
             obj.owner_id = request.user.id
         obj.save()
+        
+        set_tags(obj, form.cleaned_data['tags'])
 
 
 class ProducerAdmin(admin.ModelAdmin):
