@@ -51,7 +51,8 @@ SESSION_COOKIE_NAME = 'sessionid' # Cookie name. This can be whatever you want.
 # django-secure
 # https://github.com/carljm/django-secure/
 SECURE_SSL_REDIRECT         = False
-SECURE_FRAME_DENY           = True
+# SECURE_FRAME_DENY           = True
+X_FRAME_OPTIONS             = 'SAMEORIGIN'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER   = True
 SECURE_HSTS_SECONDS         = 3
@@ -134,7 +135,7 @@ CKEDITOR_CONFIGS = {
    'default': {
        'toolbar': 'Full',
        'height': 300,
-       #'width': 300,
+       'width': '100%',
    },
 }
 
@@ -173,6 +174,7 @@ INSTALLED_APPS = (
     
     'products',
     'banners',
+    'cms',
 )
 
 MIDDLEWARE_CLASSES = (

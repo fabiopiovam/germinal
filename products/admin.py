@@ -5,7 +5,6 @@ from products.models import Product, Producer, Segment, Certificate, Country, St
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 
 class PhotoInline(SortableTabularInline):
-    #template = 'admin/tabular_image.html'
     model = Photo
     extra = 1
 

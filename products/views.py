@@ -3,13 +3,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader
+from django.core.exceptions import ObjectDoesNotExist
 
 from models import Product
 from banners.models import Banner
 
 def index(request):
-    product_list        = Product.activated.all()[:8]
-    banner_principal    = Banner.activated.get(type='principal')
+    product_list = Product.activated.all()[:8]
+    
+    try:
+        banner_principal = Banner.activated.get(type='principal')
+    except ObjectDoesNotExist:
+        banner_principal = None
     
     template = loader.get_template('products/index.html')
     context = RequestContext(request, {
