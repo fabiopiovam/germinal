@@ -11,15 +11,9 @@ from banners.models import Banner
 def index(request):
     product_list = Product.activated.all()[:8]
     
-    try:
-        banner_principal = Banner.activated.get(type='principal')
-    except ObjectDoesNotExist:
-        banner_principal = None
-    
     template = loader.get_template('products/index.html')
     context = RequestContext(request, {
         'product_list'  : product_list,
-        'banner_principal'  : banner_principal,
     })
     return HttpResponse(template.render(context))
 

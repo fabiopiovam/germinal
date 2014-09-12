@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
 {% load thumbnail %}
+{% load banner %}
 
 {% block title %} Início {% endblock %}
 
@@ -11,7 +12,7 @@
 
 {% block content %}
 
-{% include "products/_carousel.html" %}
+{% generate_banner 'principal' %}
 
 <div class="germinal-section section-segment">
 	<div class="container marketing">
@@ -62,9 +63,9 @@
 
 <div class="germinal-section section-institutional">
 	<div class="container marketing">
-
-		{% for product in product_list %}
+		
 		<div class="row">
+			{% for product in product_list %}
 			<div class="col-md-3" style="border: 1px solid #f7c49b; border-radius: 10px;">
 				<div style="width: 334px; text-align: center;height: 255px;vertical-align: middle;display:table-cell;">
 					<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
@@ -103,8 +104,4 @@
 	</div>
 </div>
 
-{% endblock %}
-
-{% block script %}
-<script> get_carousel_indicators('#carousel-principal'); </script>
 {% endblock %}
