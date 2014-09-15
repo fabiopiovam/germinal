@@ -3,6 +3,7 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
 from django import forms
+from adminsortable.admin import SortableAdmin
 
 from cms.models import Category, Page
 from tags import set_tags
@@ -12,7 +13,7 @@ class FormPage(FormTags):
     class Meta:
         model = Page
 
-class PageAdmin(admin.ModelAdmin):
+class PageAdmin(SortableAdmin):
     list_display = ('title','published')
     search_fields = ['title','slug']
     list_filter = ['category__title','published']

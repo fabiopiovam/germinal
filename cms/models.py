@@ -5,6 +5,7 @@ from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
 
 from ckeditor.fields import RichTextField
+from adminsortable.models import Sortable
 
 class Category(models.Model):
     def __unicode__(self):
@@ -24,9 +25,9 @@ class Category(models.Model):
 
 class PageActivatedManager(models.Manager):
     def get_queryset(self):
-        return super(PageActivatedManager, self).get_queryset().filter(published=True).order_by('-created_at')
+        return super(PageActivatedManager, self).get_queryset().filter(published=True).order_by('order')
 
-class Page(models.Model):    
+class Page(Sortable):
     def __unicode__(self):
         return u'%s' % self.title
     

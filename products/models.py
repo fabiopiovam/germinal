@@ -149,7 +149,7 @@ class Photo(Sortable):
 
 class ProductActivatedManager(models.Manager):
     def get_queryset(self):
-        return super(ProductActivatedManager, self).get_queryset().filter(published=True).order_by('-updated_at')
+        return super(ProductActivatedManager, self).get_queryset().filter(published=True).order_by('order')
 
 class Product(Sortable):
     def __unicode__(self):

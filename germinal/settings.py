@@ -136,6 +136,7 @@ CKEDITOR_CONFIGS = {
        'toolbar': 'Full',
        'height': 300,
        'width': '100%',
+       'entities_latin': False,
    },
 }
 
@@ -146,7 +147,6 @@ THUMBNAIL_ALIASES = {
         'small': {'size': (140, 140), 'crop': 'scale'},
         
         'banner-small': {'size': (140, 90), 'crop': 'scale'},
-        'banner-full': {'size': (1350, 563), 'crop': 'scale'},
         
         'segment-small': {'size': (140, 140), 'crop': 'scale'},
     },

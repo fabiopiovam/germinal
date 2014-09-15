@@ -9,7 +9,7 @@ from models import Product
 from banners.models import Banner
 
 def index(request):
-    product_list = Product.activated.all()[:8]
+    product_list = Product.activated.all()[:9]
     
     template = loader.get_template('products/index.html')
     context = RequestContext(request, {

@@ -18,7 +18,7 @@
 	<div class="container marketing">
 		<!-- Thrsel -->
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-md-4">
 				<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
 				<h2>Heading</h2>
 				<p>
@@ -30,8 +30,8 @@
 				<p>
 					<a class="btn btn-default" href="#" role="button">View details »</a>
 				</p>
-			</div><!-- /.col-lg-4 -->
-			<div class="col-lg-4">
+			</div>
+			<div class="col-md-4">
 				<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
 				<h2>Heading</h2>
 				<p>
@@ -43,8 +43,8 @@
 				<p>
 					<a class="btn btn-default" href="#" role="button">View details »</a>
 				</p>
-			</div><!-- /.col-lg-4 -->
-			<div class="col-lg-4">
+			</div>
+			<div class="col-md-4">
 				<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
 				<h2>Heading</h2>
 				<p>
@@ -56,7 +56,7 @@
 				<p>
 					<a class="btn btn-default" href="#" role="button">View details »</a>
 				</p>
-			</div><!-- /.col-lg-4 -->
+			</div>
 		</div><!-- /.row -->
 	</div>
 </div>
@@ -66,23 +66,37 @@
 		
 		<div class="row">
 			{% for product in product_list %}
-			<div class="col-md-3" style="border: 1px solid #f7c49b; border-radius: 10px;">
-				<div style="width: 334px; text-align: center;height: 255px;vertical-align: middle;display:table-cell;">
-					<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
+			<div class="col-sm-4 product-list">
+				<div class="product-list-description">
+					<div class="product-list-img">
+						<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" }}'>
+					</div>
+					<h3>{{ product.title }}</h3>
+					<p>
+						<b>Peso Líquido:</b> {{ product.unit }}
+					</p>
+					<p>
+						<b>Ingredientes:</b> {{ product.ingredients|striptags|truncatewords:15 }}
+					</p>
+					<p>
+						<b>Características:</b> {{ product.characteristics|striptags|truncatewords:15 }}
+					</p>
+					<p>
+						<b>Produtor:</b> {{ product.producer }}
+					</p>
+					<p>
+						{% for cert in product.certificate.all %}
+							{% if forloop.first %} <b>Certificado</b> {% endif %}
+							{{ cert.title }}{% if not forloop.last %}, {% endif %}
+						{% endfor %}
+					</p>
 				</div>
-				<h3>{{ product.title }} ({{ product.unit }})</h3>
-				<p>
-					Ingredientes: {{ product.ingredients|striptags|truncatewords:23 }}
-				</p>
-				<p>
-					Características: {{ product.characteristics|striptags|truncatewords:23 }}
-				</p>
-				<p>
-					<a class="btn btn-default" href="{{ product.get_absolute_url }}" role="button" title="Confira!">Ver produto</a>
-				</p>
+				<div>
+					<p><a class="btn btn-default" href="{{ product.get_absolute_url }}" role="button" title="Confira!">Ver produto</a></p>
+				</div>
 			</div>
 
-			{% if forloop.counter|divisibleby:"4" %}
+			{% if forloop.counter|divisibleby:"3" %}
 		</div>
 		<div class="row">
 			{% endif %}
