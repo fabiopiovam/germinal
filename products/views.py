@@ -5,15 +5,17 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.core.exceptions import ObjectDoesNotExist
 
-from models import Product
+from models import Product, Segment
 from banners.models import Banner
 
 def index(request):
-    product_list = Product.activated.all()[:9]
+    product_list = Product.activated.all()[:8]
+    segment_list = Segment.objects.all()
     
     template = loader.get_template('products/index.html')
     context = RequestContext(request, {
         'product_list'  : product_list,
+        'segment_list'  : segment_list,
     })
     return HttpResponse(template.render(context))
 
@@ -33,5 +35,16 @@ def details(request, slug):
     context = RequestContext(request, {
         'product'   : product,
         'http_referer' : http_referer,
+    })
+    return HttpResponse(template.render(context))
+
+def query_by_segment(request, slug):
+    product_list = Product.activated.filter(segment__slug=slug)[:8]
+    segment_list = Segment.objects.all()
+    
+    template = loader.get_template('products/index.html')
+    context = RequestContext(request, {
+        'product_list'  : product_list,
+        'segment_list'  : segment_list,
     })
     return HttpResponse(template.render(context))
