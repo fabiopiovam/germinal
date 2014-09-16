@@ -76,6 +76,10 @@ body {
     .product-list-img {
         height: auto;
     }
+    
+    .segment-list {
+        padding: 15px !important;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -145,6 +149,10 @@ body {
     
     .product-list-description {
         min-height: 550px !important;
+    }
+    
+    .segment-list-description {
+        min-height: 300px !important;
     }
 }
 

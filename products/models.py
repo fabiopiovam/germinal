@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import random, glob, os, shutil
 from datetime import datetime
 
@@ -70,14 +71,17 @@ class Producer(models.Model):
     email =  models.EmailField(u'E-mail', null=True, blank=True, max_length=100)
     phone =  models.CharField(u'Telefone', null=True, blank=True, max_length=100)
     website =  models.CharField(u'Website', null=True, blank=True, max_length=100)
-    
+
 class Segment(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
     
     class Meta:
         verbose_name = u"segmento"
-        
+    
+    def get_absolute_url(self):
+        return reverse('segment', kwargs={'slug': self.slug})
+      
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)
@@ -103,6 +107,7 @@ class Segment(models.Model):
         return 'segments/%s_%s.%s' % (self.slug, datetime.now().strftime('%Y%m%d%H%M%S'), ext)
     
     title = models.CharField(u'Segmento', max_length=160)
+    description = models.TextField(u'Descrição', null=True, blank=True)
     slug = models.SlugField(max_length=200)
     image = ThumbnailerImageField(u'Imagem', blank=True, null=True, upload_to = get_upload_to_image, resize_source=dict(size=(250, 250), sharpen=False, crop="scale"))
 

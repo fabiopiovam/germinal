@@ -53,8 +53,9 @@ class ProducerAdmin(admin.ModelAdmin):
 
 
 class SegmentAdmin(admin.ModelAdmin):
-    search_fields = ['title','slug']
-    fields = ('title','image')
+    list_display = ('title','slug')
+    search_fields = ['title','slug','description']
+    fields = ('title','description','image')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Producer, ProducerAdmin)
