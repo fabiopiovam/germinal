@@ -9,7 +9,7 @@ from models import Product, Segment
 from banners.models import Banner
 
 def index(request):
-    product_list = Product.activated.all()[:8]
+    product_list = Product.activated.all()[:9]
     segment_list = Segment.objects.all()
     
     template = loader.get_template('products/index.html')
@@ -39,7 +39,7 @@ def details(request, slug):
     return HttpResponse(template.render(context))
 
 def query_by_segment(request, slug):
-    product_list = Product.activated.filter(segment__slug=slug)[:8]
+    product_list = Product.activated.filter(segment__slug=slug)[:9]
     segment_list = Segment.objects.all()
     
     template = loader.get_template('products/index.html')

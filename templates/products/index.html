@@ -25,7 +25,7 @@
 					<img class="img-circle" src='{{ segment.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
 					<h2>{{ segment.title }}</h2>
 					<p>
-						{{ segment.description }}
+						{{ segment.description|default:"" }}
 					</p>
 				</div>
 				<div>
