@@ -11,8 +11,13 @@ body {
     background-color: #222222;
 }
 
+.section-products {
+    /* background-color: #efe3af; */
+    background-color: #ffffdc;
+}
+
 .section-institutional {
-    background-color: #efe3af;
+    background-color: #fff;
 }
 
 .navbar-menu-customized {
