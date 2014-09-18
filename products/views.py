@@ -10,7 +10,7 @@ from banners.models import Banner
 
 def index(request):
     product_list = Product.activated.all()[:9]
-    segment_list = Segment.objects.all()
+    segment_list = Segment.objects.all().order_by('order')[:3]
     
     template = loader.get_template('products/index.html')
     context = RequestContext(request, {

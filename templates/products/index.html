@@ -19,7 +19,6 @@
 		<!-- Thrsel -->
 		<div class="row">
 			{% for segment in segment_list %}
-			{% if segment.product_set.count %}
 			<div class="col-sm-4 segment-list">
 				<div class="segment-list-description">
 					<img class="img-circle" src='{{ segment.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
@@ -37,7 +36,6 @@
 			{% if forloop.counter|divisibleby:"3" %}
 		</div>
 		<div class="row">
-			{% endif %}
 			{% endif %}
 			{% endfor %}
 		</div><!-- /.row -->

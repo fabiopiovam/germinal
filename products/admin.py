@@ -52,7 +52,7 @@ class ProducerAdmin(admin.ModelAdmin):
     ]
 
 
-class SegmentAdmin(admin.ModelAdmin):
+class SegmentAdmin(SortableAdmin):
     list_display = ('title','slug')
     search_fields = ['title','slug','description']
     fields = ('title','description','image')

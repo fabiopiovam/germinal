@@ -72,7 +72,7 @@ class Producer(models.Model):
     phone =  models.CharField(u'Telefone', null=True, blank=True, max_length=100)
     website =  models.CharField(u'Website', null=True, blank=True, max_length=100)
 
-class Segment(models.Model):
+class Segment(Sortable):
     def __unicode__(self):
         return u'%s' % self.title
     
