@@ -44,6 +44,10 @@ body {
     display: table-cell;
 }
 
+.featurette-heading {
+    margin-top: 0 !important;
+}
+
 @media only screen and (max-width: 768px) {
     .navbar-menu-customized {
         margin-top: 0;

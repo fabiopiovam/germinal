@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 {% load banner %}
+{% load cms_pages %}
 
 {% block title %} Início {% endblock %}
 
@@ -97,7 +98,7 @@
 
 <div class="germinal-section section-institutional">
 	<div class="container marketing">
-		{% include "products/_institutional.html" %}
+		{% list_pages 'principios' %}
 	</div>
 </div>
 
