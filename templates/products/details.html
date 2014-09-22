@@ -72,38 +72,46 @@
 					{{ product.get_harvest_from_display }} à {{ product.get_harvest_until_display }}
 				</p>
 				{% endif %}
-				
-				{% autoescape off %}
-				<p>
-					<b>Características:</b> 
-					{{ product.characteristics }}
-				</p>
-				<p>
-                	<b> Ingredientes: </b>
-                	{{ product.ingredients }}
-                </p>
-                {% endautoescape %}
-            </div>
-        </div>
-	</div>
-</div>
-
-<div class="germinal-section section-institutional">
-	<div class="container marketing">
-		<div class="row">
-			<div class="col-sm-12">				
-				{% autoescape off %}
+			</div>
+			
+			{% autoescape off %}
+			{% if product.characteristics %}
+			<div class="col-sm-6">
 				<div class="description">
+					<h2>Características</h2> 
+					{{ product.characteristics }}
+				</div>
+			</div>
+			{% endif %}
+			
+			{% if product.ingredients %}
+			<div class="col-sm-6">
+				<div class="description">
+                	<h2> Ingredientes</h2>
+                	{{ product.ingredients }}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if product.description %}
+			<div class="col-sm-6">
+                <div class="description">
                 	<h2> Descrição </h2>
                 	{{ product.description }}
                 </div>
+            </div>
+            {% endif %}
+            
+            {% if product.nutrition_facts %}
+			<div class="col-sm-6">
                 <div class="description">
                 	<h2> Informações Nutricionais </h2>
                 	{{ product.nutrition_facts }}
                 </div>
-                {% endautoescape %}
-			</div>
-		</div>
+            </div>
+            {% endif %}
+            {% endautoescape %}
+        </div>
 	</div>
 </div>
 
