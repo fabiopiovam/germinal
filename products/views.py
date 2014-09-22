@@ -51,7 +51,7 @@ def query_by_segment(request, slug):
 
 def products_list(request):
     product_list = Product.activated.all()
-    print product_list
+    
     template = loader.get_template('products/products.html')
     context = RequestContext(request, {
         'product_list'  : product_list,

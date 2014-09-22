@@ -18,3 +18,17 @@ def list_pages(category=''):
         pages = None
     
     return {'pages': pages,}
+
+@register.assignment_tag
+def get_page_links(category=''):
+    
+    try:
+        if not category:
+            pages = Page.activated.all()
+        else:
+            pages = Page.activated.filter(category__slug=category)
+        
+    except ObjectDoesNotExist:
+        pages = None
+    
+    return pages
