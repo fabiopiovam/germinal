@@ -15,7 +15,8 @@ urlpatterns = patterns('',
     
     url(r'^$', 'products.views.index', name='home'),
     url(r'^(?P<slug>[\w_-]+)$', 'products.views.details', name='product'),
-    url(r'^segment/(?P<slug>[\w_-]+)$', 'products.views.query_by_segment', name='segment'),
+    url(r'^products/(?P<slug>[\w_-]+)$', 'products.views.query_by_segment', name='segment'),
+    url(r'^products/$', 'products.views.products_list', name='products'),
 )
 
 if settings.LOCAL:

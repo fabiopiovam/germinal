@@ -1,0 +1,33 @@
+{% load thumbnail %}
+
+<div class="col-sm-4 product-list">
+	<div class="product-list-description">
+		<div class="product-list-img">
+			<img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
+		</div>
+		<h3>{{ product.title }}</h3>
+		<p>
+			<b>Peso Líquido:</b> {{ product.unit }}
+		</p>
+		<p>
+			<b>Ingredientes:</b> {{ product.ingredients|striptags|truncatewords:15 }}
+		</p>
+		<p>
+			<b>Características:</b> {{ product.characteristics|striptags|truncatewords:15 }}
+		</p>
+		<p>
+			<b>Produtor:</b> {{ product.producer }}
+		</p>
+		<p>
+			{% for cert in product.certificate.all %}
+			{% if forloop.first %} <b>Certificado</b> {% endif %}
+			{{ cert.title }}{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</p>
+	</div>
+	<div>
+		<p>
+			<a class="btn btn-default" href="{{ product.get_absolute_url }}" role="button" title="Confira!">Ver produto</a>
+		</p>
+	</div>
+</div>

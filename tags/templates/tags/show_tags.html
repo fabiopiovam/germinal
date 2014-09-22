@@ -1,8 +1,8 @@
 {% load tags_tags %}
 
 <p>
-Tags:
 {% for tag in object|get_tags %}
-<a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+{% if forloop.first %}Tags: {% endif %}
+<a href="{{ tag.get_absolute_url }}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
 {% endfor %}
 </p>

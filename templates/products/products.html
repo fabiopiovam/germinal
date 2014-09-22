@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load banner %}
+{% load cms_pages %}
+
+{% block title %} Início {% endblock %}
+
+{% block top %}
+{% generate_banner 'principal' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="germinal-section section-products">
+	<div class="container marketing">
+		<h1>
+			<a href="/products/" title="ver todos os produtos">Produtos</a>
+			{% if filter %} / {{ filter }} {% endif %}
+		</h1>
+		<div class="row">
+			{% for product in product_list %}
+			{% include "products/_product_box.html" %}
+			{% if forloop.counter|divisibleby:"3" %}
+		</div>
+		<div class="row">
+			{% endif %}
+
+			{% empty %}
+			
+			<div class="col-md-12">
+				<p>
+					Em breve publicaremos os produtos disponíveis, aguardem!
+				</p>
+			</div>
+
+			{% endfor %}
+		</div>
+	</div><!-- /.container -->
+</div>
+
+{% endblock %}

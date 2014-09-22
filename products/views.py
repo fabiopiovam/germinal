@@ -39,12 +39,21 @@ def details(request, slug):
     return HttpResponse(template.render(context))
 
 def query_by_segment(request, slug):
-    product_list = Product.activated.filter(segment__slug=slug)[:9]
-    segment_list = Segment.objects.all()
+    product_list = Product.activated.filter(segment__slug=slug)
+    segment = Segment.objects.get(slug=slug)
     
-    template = loader.get_template('products/index.html')
+    template = loader.get_template('products/products.html')
     context = RequestContext(request, {
         'product_list'  : product_list,
-        'segment_list'  : segment_list,
+        'filter'  : segment.title,
+    })
+    return HttpResponse(template.render(context))
+
+def products_list(request):
+    product_list = Product.activated.all()
+    print product_list
+    template = loader.get_template('products/products.html')
+    context = RequestContext(request, {
+        'product_list'  : product_list,
     })
     return HttpResponse(template.render(context))

@@ -7,6 +7,7 @@
 	<!--<![endif]-->
 	{% load staticfiles %}
 	{% load google_analytics %}
+	{% load segments %}
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
@@ -33,7 +34,10 @@
 
 		<!-- Custom styles for this template -->
 		<style type="text/css" id="holderjs-style"></style>
-
+		
+		<link rel="stylesheet" href="{% static 'products/css/carousel.css' %}">
+		<link rel="stylesheet" href="{% static 'products/css/carousel-customized.css' %}">
+		
 		{% block head %}{% endblock %}
 	</head>
 	<!-- NAVBAR
@@ -45,7 +49,7 @@
 		<div class="navbar-wrapper">
 
 			<div class="navbar-logo">
-				<img src="{%static 'products/img/germinal.png'%}" alt="" />
+				<a href="/" title="Início"><img src="{%static 'products/img/germinal.png'%}" alt="" /></a>
 			</div>
 
 			<div class="navbar-menu-customized">
@@ -62,37 +66,39 @@
 						<div class="navbar-collapse collapse navbar-right">
 							<ul class="nav navbar-nav">
 								<li class="active">
-									<a href="#">Home</a>
-								</li>
-								<li>
-									<a href="#about">About</a>
-								</li>
-								<li>
-									<a href="#contact">Contact</a>
+									<a href="/">Início</a>
 								</li>
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Produtos <span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
 										<li>
-											<a href="#">Action</a>
-										</li>
-										<li>
-											<a href="#">Another action</a>
-										</li>
-										<li>
-											<a href="#">Something else here</a>
+											<a href="/products/">Todos</a>
 										</li>
 										<li class="divider"></li>
 										<li class="dropdown-header">
-											Nav header
+											Segmentos
+										</li>
+										{% get_segments_list as segments_list %}
+										{% for segment in segments_list %}
+										<li>
+											<a href="{{ segment.get_absolute_url }}">{{ segment.title }}</a>
+										</li>
+										{% endfor %}
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Institucional <span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<a href="#">Por quê Germinal?</a>
 										</li>
 										<li>
-											<a href="#">Separated link</a>
-										</li>
-										<li>
-											<a href="#">One more separated link</a>
+											<a href="#">Princípios</a>
 										</li>
 									</ul>
+								</li>
+								<li>
+									<a href="#contact">Contato</a>
 								</li>
 							</ul>
 						</div>
@@ -102,6 +108,18 @@
 
 		</div>
 
+		{% block top %}
+		
+		<div class="carousel slide">
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="{% static 'products/img/top_image.png' %}">
+				</div>
+			</div>
+		</div>
+		
+		{% endblock %}
+		
 		{% block content %}{% endblock %}
 
 		<div class="container">
