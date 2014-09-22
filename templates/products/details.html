@@ -93,6 +93,15 @@
             </div>
             {% endif %}
             
+            {% if product.nutrition_facts %}
+			<div class="col-sm-6">
+                <div class="description">
+                	<h2> Informações Nutricionais </h2>
+                	{{ product.nutrition_facts }}
+                </div>
+            </div>
+            {% endif %}
+            
             {% if product.description %}
 			<div class="col-sm-6">
                 <div class="description">
@@ -102,19 +111,13 @@
             </div>
             {% endif %}
             
-            {% if product.nutrition_facts %}
-			<div class="col-sm-6">
-                <div class="description">
-                	<h2> Informações Nutricionais </h2>
-                	{{ product.nutrition_facts }}
-                </div>
-            </div>
-            {% endif %}
             {% endautoescape %}
         </div>
 	</div>
 </div>
 
 {% endif %}
+
+<hr class="featurette-divider">
 
 {% endblock %}
