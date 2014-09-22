@@ -74,8 +74,15 @@
 				{% endif %}
 				
 				{% autoescape off %}
-				{{ product.characteristics }}
-				{% endautoescape %}
+				<p>
+					<b>Características:</b> 
+					{{ product.characteristics }}
+				</p>
+				<p>
+                	<b> Ingredientes: </b>
+                	{{ product.ingredients }}
+                </p>
+                {% endautoescape %}
             </div>
         </div>
 	</div>
@@ -91,18 +98,10 @@
                 	{{ product.description }}
                 </div>
                 <div class="description">
-                	<h2> Ingredientes </h2>
-                	{{ product.ingredients }}
-                </div>
-                <div class="description">
                 	<h2> Informações Nutricionais </h2>
                 	{{ product.nutrition_facts }}
                 </div>
                 {% endautoescape %}
-                
-                {% with product as object %}
-				{% include "tags/show_tags.html" %}
-				{% endwith %}
 			</div>
 		</div>
 	</div>
