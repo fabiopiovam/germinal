@@ -69,7 +69,7 @@
 				{% if product.harvest_from %}
 				<p>
 					<b>Safra:</b>
-					{{ product.harvest_from }} à {{ product.harvest_until }}
+					{{ product.get_harvest_from_display }} à {{ product.get_harvest_until_display }}
 				</p>
 				{% endif %}
 				
