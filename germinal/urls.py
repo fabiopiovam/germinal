@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     
     (r'^pages/', include('cms.urls')),
     (r'^tags/', include('tags.urls')),
+    (r'^contact/', include('contact.urls')),
     
     url(r'^$', 'products.views.index', name='home'),
     url(r'^(?P<slug>[\w_-]+)$', 'products.views.details', name='product'),

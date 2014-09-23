@@ -178,6 +178,7 @@ INSTALLED_APPS = (
     'banners',
     'cms',
     'tags',
+    'contact',
 )
 
 MIDDLEWARE_CLASSES = (
