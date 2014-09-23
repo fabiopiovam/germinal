@@ -8,8 +8,21 @@ from django.core.exceptions import ObjectDoesNotExist
 from models import Page
 
 
-def pages(request):
-    pass
+def pages(request, category_slug=''):
+    try:
+        if not category_slug:
+            pages = Page.activated.all()
+        else:
+            pages = Page.activated.filter(category__slug=category_slug)
+        
+    except ObjectDoesNotExist:
+        pages = None
+    
+    template = loader.get_template('cms/list_pages.html')
+    context = RequestContext(request, {
+        'pages'  : pages,
+    })
+    return HttpResponse(template.render(context))
 
 def page(request,slug):
     

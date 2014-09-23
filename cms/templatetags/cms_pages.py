@@ -5,7 +5,7 @@ from cms.models import Category, Page
 
 register = Library()
 
-@register.inclusion_tag('cms/list_pages.html')
+@register.inclusion_tag('cms/_list_pages.html')
 def list_pages(category=''):
     
     try:
