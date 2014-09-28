@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Cancelar assinatura para {{ newsletter.title }}</title>
+</head>
+<body>
+<p>Olá {{ subscription.name }}!</p>
+
+<p>Você ou alguém em seu nome requeriu o cancelamento da assinatura para o boletim {{ newsletter.title }}.</p>
+
+<p>Para confirmar o cancelamento da assinatura acesse o link abaixo:</p>
+<a href="http://{{ site.domain }}{{ subscription.unsubscribe_activate_url }}">http://{{ site.domain }}{{ subscription.unsubscribe_activate_url }}</a>
+
+<p>Atenciosamente,</p>
+{{ newsletter.sender }} - <a href="http://{{ site.domain }}">http://{{ site.domain }}</a>
+</body>
+</html>

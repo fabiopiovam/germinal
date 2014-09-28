@@ -1,0 +1,9 @@
+Olá {{ subscription.name }}!
+
+Você ou alguém em seu nome requeriu uma assinatura para o boletim {{ newsletter.title }}.
+
+Para confirmar sua assinatura acesse o link abaixo:
+http://{{ site.domain }}{{ subscription.subscribe_activate_url }}
+
+Atenciosamente,
+{{ newsletter.sender }} - http://{{ site.domain }}

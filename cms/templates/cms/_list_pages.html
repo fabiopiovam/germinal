@@ -10,5 +10,5 @@
 	</div>
 </div>
 
-<hr class="featurette-divider">
+{% if not forloop.last %}<hr class="featurette-divider">{% endif %}
 {% endfor %}

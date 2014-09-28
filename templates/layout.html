@@ -126,17 +126,30 @@
 		{% endblock %}
 
 		{% block content %}{% endblock %}
-
-		<div class="container">
-			<!-- FOOTER -->
-			<footer>
-				<p class="pull-right">
-					<a href="#">voltar ao topo</a>
-				</p>
-				<p>
-					© 2014 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a>
-				</p>
-			</footer>
+		
+		<div class="germinal-section section-footer">
+			<div class="container">
+				<!-- FOOTER -->
+				<footer>
+					<div class="pull-right">
+						<a href="#">voltar ao topo</a>
+					</div>
+					<div>
+						<form class="form-inline" action="/newsletter/informativo-germinal/subscribe/" method="post" enctype="multipart/form-data">
+							<p>
+								<label for="id_email_field">Boletim informativo: </label><br/>
+								<input type="email" class="form-control" name="email_field" placeholder="e-mail" maxlength="75" id="id_email_field">
+								<input type="submit" value="Assinar" name="submit" id="id_submit" class="btn btn-primary">
+							</p>
+							<input type="hidden" name="name_field" id="id_name_field">
+							{% csrf_token %}
+						</form>
+					</div>
+					<div class="copy-left">
+						© 2014 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a>
+					</div>
+				</footer>
+			</div>
 		</div>
 
 		<!-- Bootstrap core JavaScript

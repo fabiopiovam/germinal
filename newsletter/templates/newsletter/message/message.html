@@ -7,7 +7,7 @@
 	<title>{{ newsletter.title }}: {{ message.title }}</title>
 </head>
 <body>
-    <h1>{{ newsletter.title }}</h1>
+    <h1><a href="http://{{ site.domain }}">{{ site.domain }}</a> - {{ newsletter.title }}</h1>
     <h2>{{ message.title }}</h2>
     {% for article in message.articles.all %}
         <h3>{{ article.title }}</h3>
@@ -18,7 +18,7 @@
         <div>{{ article.text|safe }}</div>
         
         {% if article.url %}
-            <div><a href="{{ article.url }}">Leia mais</div></a>
+            <div><a href="{{ article.url }}">Leia mais</a></div>
         {% endif %}
     {% endfor %}
     
@@ -26,7 +26,7 @@
         {% if submission.publish %}
         <li><a href="http://{{ site.domain }}{{ submission.get_absolute_url }}">Leia online</a></li>
         {% endif %}
-        <li><a href="http://{{ site.domain }}{% url "newsletter_unsubscribe_request" newsletter.slug %}">Cancela assinatura</a></li>
+        <li><a href='http://{{ site.domain }}{% url "newsletter_unsubscribe_request" newsletter.slug %}'>Cancela assinatura</a></li>
     </ul>
 </body>
 </html>

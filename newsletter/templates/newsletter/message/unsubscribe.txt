@@ -1,0 +1,9 @@
+Olá {{ subscription.name }}!
+
+Você ou alguém em seu nome requeriu o cancelamento da assinatura para o boletim {{ newsletter.title }}.
+
+Para confirmar o cancelamento da assinatura acesse o link abaixo:
+http://{{ site.domain }}{{ subscription.unsubscribe_activate_url }}
+
+Atenciosamente,
+{{ newsletter.sender }} - http://{{ site.domain }}
