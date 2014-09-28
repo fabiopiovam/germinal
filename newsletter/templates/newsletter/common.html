@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}{% trans "Newsletter" %}{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'newsletter/css/newsletter.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="germinal-section section-institutional">
+	<div class="container" id="newsletter">
+		<h2 class="featurette-heading"> Boletim Informativo </h2>
+		{% block body %}
+		{% endblock body %}
+	</div>
+</div>
+{% endblock content %}

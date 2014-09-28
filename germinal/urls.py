@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
+    (r'^newsletter/', include('newsletter.urls')),
     
     (r'^pages/', include('cms.urls')),
     (r'^tags/', include('tags.urls')),

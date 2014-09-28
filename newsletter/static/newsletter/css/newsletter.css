@@ -1,0 +1,31 @@
+#newsletter td, th {
+  padding: 5px 10px;
+}
+
+#newsletter tr {
+  border-bottom: 1px solid #ccc;
+}
+
+#newsletter table {
+  width: 100%;
+  
+}
+
+#newsletter input[type="submit"] {
+  padding: 5px;
+  margin-top: 20px;
+}
+
+#newsletter h1 {
+    font-size: 16px;
+    line-height: 1.42857;
+    font-weight: bold;
+}
+
+#newsletter .errorlist {
+    font-size: 12px;
+    list-style: none outside none;
+    padding: 0;
+    color: #A03636;
+    margin: 10px 0 0;
+}
