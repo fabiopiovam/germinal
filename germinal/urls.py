@@ -1,22 +1,25 @@
 from django.conf.urls import patterns, include, url
 
+from surlex.dj import surl
+
 from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
 admin.autodiscover()
 
-from newsletter_custom.views import UpdateSubscriptionVievCustom
+from newsletter_custom.views import UpdateSubscriptionViev
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
     
-    ('^<newsletter_slug:s>/subscription/<email=[-_a-zA-Z0-9@\.\+~]+>/'
-     '<action=subscribe|update|unsubscribe>/activate/<activation_code:s>/$', 
-     UpdateSubscriptionVievCustom.as_view()),
-    
+    #newsletter with customization
+    surl('^newsletter/<newsletter_slug:s>/subscription/<email=[-_a-zA-Z0-9@\.\+~]+>/'
+         '<action=subscribe|update|unsubscribe>/activate/<activation_code:s>/$',
+         UpdateSubscriptionViev.as_view(), name='newsletter_update_activate'),
     (r'^newsletter/', include('newsletter.urls')),
+    
     
     (r'^pages/', include('cms.urls')),
     (r'^tags/', include('tags.urls')),
