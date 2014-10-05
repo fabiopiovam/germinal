@@ -68,4 +68,5 @@ static/*
 # Others
 germinal/settings_local.py
 germinal/settings_production.py
+production_env/
 *.directory
